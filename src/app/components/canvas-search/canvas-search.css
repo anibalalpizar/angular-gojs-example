@@ -1,0 +1,172 @@
+.canvas-search-overlay {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  width: min(460px, calc(100vw - 200px));
+  animation: cs-slide-down 0.18s ease-out both;
+}
+
+@keyframes cs-slide-down {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.canvas-search-box {
+  background: #ffffff;
+  border: 1px solid #dbe3ee;
+  border-radius: 10px;
+  box-shadow: 0 16px 40px rgba(23, 37, 55, 0.18);
+  overflow: hidden;
+}
+
+/* ── Input row ── */
+.canvas-search-input-wrapper {
+  display: flex;
+  align-items: center;
+  padding: 10px 14px;
+  gap: 8px;
+}
+
+.canvas-search-icon {
+  display: flex;
+  align-items: center;
+  color: #8fa3b8;
+  flex-shrink: 0;
+}
+
+.canvas-search-input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  color: #122033;
+  background: transparent;
+}
+
+.canvas-search-input::placeholder {
+  color: #b0bec8;
+}
+
+.canvas-search-clear {
+  flex-shrink: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: #8fa3b8;
+  font-size: 12px;
+  padding: 3px 5px;
+  border-radius: 4px;
+  line-height: 1;
+  transition: background 0.12s, color 0.12s;
+}
+
+.canvas-search-clear:hover {
+  background: #f0f4f8;
+  color: #526173;
+}
+
+/* ── Results (tree) ── */
+.canvas-search-results {
+  border-top: 1px solid #eaf0f8;
+  max-height: 360px;
+  overflow-y: auto;
+}
+
+/* ── Tree nodes ── */
+.search-tree-node {
+  /* container; indentation applied on the button via padding-left binding */
+}
+
+.search-tree-item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  padding-right: 14px;
+  /* padding-left set via style binding */
+  gap: 9px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.12s;
+}
+
+.search-tree-item:hover {
+  background: #f4f8ff;
+}
+
+/* Ancestor node (context, not a match) */
+.search-tree-item:not(.is-match) {
+  opacity: 0.55;
+}
+
+/* Highlighted match */
+.search-tree-item.is-match {
+  opacity: 1;
+}
+
+.search-tree-item.is-match .search-tree-name {
+  color: #0f6fff;
+  font-weight: 700;
+}
+
+.search-tree-avatar {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.search-tree-info {
+  min-width: 0;
+}
+
+.search-tree-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #122033;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.search-tree-role {
+  font-size: 11px;
+  color: #697789;
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.canvas-search-more {
+  padding: 8px 14px;
+  font-size: 11px;
+  color: #8fa3b8;
+  border-top: 1px solid #eaf0f8;
+  text-align: center;
+}
+
+.canvas-search-empty {
+  padding: 14px;
+  font-size: 13px;
+  color: #8fa3b8;
+  text-align: center;
+}

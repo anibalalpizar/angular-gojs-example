@@ -15,8 +15,9 @@
 .diagram-toolbar {
   position: absolute;
   top: 16px;
-  right: 16px;
-  z-index: 10;
+  right: 16px; /* overridden by style binding */
+  z-index: 20;
+  transition: right 0.24s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   gap: 6px;
   padding: 6px;
@@ -51,10 +52,30 @@
   outline-offset: 2px;
 }
 
+.icon-button--active {
+  color: #0f8f7f;
+  background: #eefaf7;
+  border-color: #a7d7ce;
+}
+
+.icon-button--active:hover {
+  color: #0a6b5e;
+  background: #d9f5f0;
+}
+
+.toolbar-divider {
+  width: 1px;
+  height: 20px;
+  background: #dbe3ee;
+  margin: 0 2px;
+  flex-shrink: 0;
+}
+
 .overview-panel {
   position: absolute;
-  right: 16px;
+  right: 16px; /* overridden by style binding */
   bottom: 16px;
+  transition: right 0.24s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 10;
   width: min(240px, calc(100vw - 32px));
   height: 150px;

@@ -1,6 +1,8 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
-import { LucideMaximize2, LucideZoomIn, LucideZoomOut } from '@lucide/angular';
+import { LucideMaximize2, LucideNetwork, LucideSearch, LucideZoomIn, LucideZoomOut } from '@lucide/angular';
 import * as go from 'gojs';
+import { CanvasSearchComponent } from './components/canvas-search/canvas-search';
+import { TreeViewPanelComponent } from './components/tree-view-panel/tree-view-panel';
 
 interface OrgNode {
   key: number;
@@ -12,7 +14,15 @@ interface OrgNode {
 
 @Component({
   selector: 'app-root',
-  imports: [LucideMaximize2, LucideZoomIn, LucideZoomOut],
+  imports: [
+    LucideMaximize2,
+    LucideZoomIn,
+    LucideZoomOut,
+    LucideSearch,
+    LucideNetwork,
+    CanvasSearchComponent,
+    TreeViewPanelComponent
+  ],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
@@ -23,8 +33,11 @@ export class App implements AfterViewInit, OnDestroy {
   @ViewChild('overviewHost', { static: true })
   private overviewHost?: ElementRef<HTMLDivElement>;
 
-  private diagram?: go.Diagram;
+  diagram?: go.Diagram;
   private overview?: go.Overview;
+
+  showCanvasSearch = false;
+  showTreeView = false;
 
   ngAfterViewInit(): void {
     if (

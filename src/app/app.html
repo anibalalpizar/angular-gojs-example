@@ -1,5 +1,9 @@
 <main class="org-chart-shell">
-  <div class="diagram-toolbar" aria-label="Controles del diagrama">
+  <div
+    class="diagram-toolbar"
+    aria-label="Controles del diagrama"
+    [style.right.px]="showTreeView ? 336 : 16"
+  >
     <button type="button" class="icon-button" aria-label="Encajar diagrama" title="Encajar" (click)="fitDiagram()">
       <svg lucideMaximize2 size="18"></svg>
     </button>
@@ -9,11 +13,51 @@
     <button type="button" class="icon-button" aria-label="Alejar" title="Zoom out" (click)="zoomOut()">
       <svg lucideZoomOut size="18"></svg>
     </button>
+
+    <div class="toolbar-divider"></div>
+
+    <button
+      type="button"
+      class="icon-button"
+      [class.icon-button--active]="showCanvasSearch"
+      aria-label="Buscar en diagrama"
+      title="Buscar nodo (Buscador flotante)"
+      (click)="showCanvasSearch = !showCanvasSearch"
+    >
+      <svg lucideSearch size="18"></svg>
+    </button>
+
+    <button
+      type="button"
+      class="icon-button"
+      [class.icon-button--active]="showTreeView"
+      aria-label="Panel de navegación"
+      title="Árbol de navegación"
+      (click)="showTreeView = !showTreeView"
+    >
+      <svg lucideNetwork size="18"></svg>
+    </button>
   </div>
 
   <div #diagramHost class="diagram-canvas" aria-label="Organigrama editable"></div>
 
-  <div class="overview-panel" aria-label="Overview del organigrama">
+  <!-- Buscador flotante sobre el canvas -->
+  <app-canvas-search
+    [diagram]="diagram"
+    [isOpen]="showCanvasSearch"
+  ></app-canvas-search>
+
+  <!-- Panel lateral de navegación en árbol -->
+  <app-tree-view-panel
+    [diagram]="diagram"
+    [(isOpen)]="showTreeView"
+  ></app-tree-view-panel>
+
+  <div
+    class="overview-panel"
+    aria-label="Overview del organigrama"
+    [style.right.px]="showTreeView ? 336 : 16"
+  >
     <div #overviewHost class="overview-canvas"></div>
   </div>
 </main>

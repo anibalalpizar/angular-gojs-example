@@ -1,0 +1,74 @@
+@if (isOpen) {
+  <div class="canvas-search-overlay">
+    <div class="canvas-search-box">
+      <div class="canvas-search-input-wrapper">
+        <span class="canvas-search-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+          </svg>
+        </span>
+        <input
+          type="text"
+          class="canvas-search-input"
+          placeholder="Buscar en el diagrama..."
+          [(ngModel)]="searchTerm"
+          (input)="onSearch()"
+          (keydown.escape)="clear()"
+          (keydown.enter)="selectFirst()"
+          autofocus
+          aria-label="Buscar nodo en el diagrama"
+        />
+        @if (searchTerm) {
+          <button class="canvas-search-clear" (click)="clear()" aria-label="Limpiar búsqueda">✕</button>
+        }
+      </div>
+
+      @if (resultTree.length > 0) {
+        <div class="canvas-search-results">
+          <ng-container
+            [ngTemplateOutlet]="searchTreeTpl"
+            [ngTemplateOutletContext]="{ nodes: resultTree, depth: 0 }"
+          ></ng-container>
+          @if (resultsTotal > 8) {
+            <div class="canvas-search-more">
+              +{{ resultsTotal - 8 }} coincidencias más — sigue escribiendo para filtrar
+            </div>
+          }
+        </div>
+      }
+
+      @if (searchTerm && resultTree.length === 0) {
+        <div class="canvas-search-empty">
+          Sin resultados para "{{ searchTerm }}"
+        </div>
+      }
+    </div>
+  </div>
+}
+
+<!-- Recursive search-tree template (outside @if so the ref is always resolvable) -->
+<ng-template #searchTreeTpl let-nodes="nodes" let-depth="depth">
+  <div *ngFor="let node of nodes" class="search-tree-node">
+    <button
+      class="search-tree-item"
+      [class.is-match]="node.isMatch"
+      [style.padding-left.px]="12 + depth * 16"
+      (click)="navigateTo(node.key)"
+    >
+      <span class="search-tree-avatar" [style.backgroundColor]="getDeptColor(node.dept)">
+        {{ getInitials(node.name) }}
+      </span>
+      <div class="search-tree-info">
+        <div class="search-tree-name">{{ node.name }}</div>
+        <div class="search-tree-role">{{ node.title }} · {{ node.dept }}</div>
+      </div>
+    </button>
+    <div *ngIf="node.children.length > 0">
+      <ng-container
+        [ngTemplateOutlet]="searchTreeTpl"
+        [ngTemplateOutletContext]="{ nodes: node.children, depth: depth + 1 }"
+      ></ng-container>
+    </div>
+  </div>
+</ng-template>
