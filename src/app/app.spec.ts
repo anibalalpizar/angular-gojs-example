@@ -14,10 +14,12 @@ describe('App', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should render title', async () => {
+  it('should render the GoJS canvas host', async () => {
     const fixture = TestBed.createComponent(App);
+    fixture.detectChanges();
     await fixture.whenStable();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, angular-gojs-example');
+    expect(compiled.querySelector('.diagram-canvas')).toBeTruthy();
+    expect(compiled.textContent?.trim()).toBe('');
   });
 });
