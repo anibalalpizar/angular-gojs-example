@@ -1,3 +1,19 @@
-<main class="diagram-shell">
-  <div #diagramHost class="diagram-canvas" aria-label="GoJS diagram canvas"></div>
+<main class="org-chart-shell">
+  <div class="diagram-toolbar" aria-label="Controles del diagrama">
+    <button type="button" class="icon-button" aria-label="Encajar diagrama" title="Encajar" (click)="fitDiagram()">
+      <svg lucideMaximize2 size="18"></svg>
+    </button>
+    <button type="button" class="icon-button" aria-label="Acercar" title="Zoom in" (click)="zoomIn()">
+      <svg lucideZoomIn size="18"></svg>
+    </button>
+    <button type="button" class="icon-button" aria-label="Alejar" title="Zoom out" (click)="zoomOut()">
+      <svg lucideZoomOut size="18"></svg>
+    </button>
+  </div>
+
+  <div #diagramHost class="diagram-canvas" aria-label="Organigrama editable"></div>
+
+  <div class="overview-panel" aria-label="Overview del organigrama">
+    <div #overviewHost class="overview-canvas"></div>
+  </div>
 </main>

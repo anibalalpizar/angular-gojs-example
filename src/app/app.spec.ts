@@ -14,12 +14,13 @@ describe('App', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should render the GoJS canvas host', async () => {
+  it('should render the org chart work surface', async () => {
     const fixture = TestBed.createComponent(App);
     fixture.detectChanges();
     await fixture.whenStable();
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('.diagram-canvas')).toBeTruthy();
-    expect(compiled.textContent?.trim()).toBe('');
+    expect(compiled.querySelector('.overview-canvas')).toBeTruthy();
+    expect(compiled.querySelectorAll('.icon-button').length).toBe(3);
   });
 });
