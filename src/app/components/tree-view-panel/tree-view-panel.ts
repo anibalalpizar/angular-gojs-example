@@ -2,28 +2,8 @@ import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import * as go from 'gojs';
-
-interface OrgNode {
-  key: number;
-  name: string;
-  title: string;
-  dept: string;
-  parent?: number;
-}
-
-export interface TreeNode extends OrgNode {
-  children: TreeNode[];
-  expanded: boolean;
-}
-
-const DEPT_COLORS: Record<string, string> = {
-  Direccion: '#0f8f7f',
-  Operaciones: '#2f6fed',
-  Producto: '#7c5cff',
-  Comercial: '#e28a22',
-  Finanzas: '#617386',
-  Soporte: '#199a5a'
-};
+import { OrgNode, TreeNode } from './tree-view-panel.model';
+import { DEPT_COLORS } from '../../models/org-node.model';
 
 @Component({
   selector: 'app-tree-view-panel',

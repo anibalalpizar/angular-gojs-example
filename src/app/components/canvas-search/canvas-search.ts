@@ -2,32 +2,8 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import * as go from 'gojs';
-
-interface OrgNode {
-  key: number;
-  name: string;
-  title: string;
-  dept: string;
-  parent?: number;
-}
-
-interface SearchResultNode {
-  key: number;
-  name: string;
-  title: string;
-  dept: string;
-  isMatch: boolean;
-  children: SearchResultNode[];
-}
-
-const DEPT_COLORS: Record<string, string> = {
-  Direccion: '#0f8f7f',
-  Operaciones: '#2f6fed',
-  Producto: '#7c5cff',
-  Comercial: '#e28a22',
-  Finanzas: '#617386',
-  Soporte: '#199a5a'
-};
+import { OrgNode, SearchResultNode } from './canvas-search.model';
+import { DEPT_COLORS } from '../../models/org-node.model';
 
 @Component({
   selector: 'app-canvas-search',
