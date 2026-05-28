@@ -7,6 +7,7 @@ export interface OrgChartSearchResult {
   total: number;
 }
 
+// busca por nombre o cargo dentro de los nodos cargados
 export function searchOrgChart(
   nodes: OrgNode[],
   term: string,
@@ -32,6 +33,7 @@ export function searchOrgChart(
   };
 }
 
+// convierte la lista plana del modelo en un arbol para el panel lateral
 export function buildTree(nodes: OrgNode[], previousTree: TreeNode[] = []): TreeNode[] {
   const previousExpanded = new Map<number, boolean>();
   collectExpandedState(previousTree, previousExpanded);
@@ -64,6 +66,7 @@ export function buildTree(nodes: OrgNode[], previousTree: TreeNode[] = []): Tree
   return roots;
 }
 
+// filtra el arbol manteniendo los padres de cada resultado
 export function filterTree(nodes: TreeNode[], term: string): TreeNode[] {
   const normalizedTerm = term.toLowerCase().trim();
 
@@ -86,6 +89,7 @@ export function filterTree(nodes: TreeNode[], term: string): TreeNode[] {
   return result;
 }
 
+// arma un arbol compacto con coincidencias y sus ancestros
 function buildSearchResultTree(nodes: OrgNode[], matches: OrgNode[]): SearchResultNode[] {
   if (matches.length === 0) {
     return [];
@@ -99,6 +103,7 @@ function buildSearchResultTree(nodes: OrgNode[], matches: OrgNode[]): SearchResu
   const matchKeys = new Set<number>(matches.map((node) => node.key));
   const includedKeys = new Set<number>();
 
+  // incluye cada resultado y el camino completo hasta la raiz
   for (const match of matches) {
     let current: OrgNode | undefined = match;
     while (current) {
@@ -144,6 +149,7 @@ function buildSearchResultTree(nodes: OrgNode[], matches: OrgNode[]): SearchResu
   return roots;
 }
 
+// recuerda que nodos estaban abiertos antes de reconstruir el arbol
 function collectExpandedState(nodes: TreeNode[], state: Map<number, boolean>): void {
   for (const node of nodes) {
     state.set(node.key, node.expanded);
