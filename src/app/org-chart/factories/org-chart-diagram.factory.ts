@@ -13,12 +13,14 @@ export interface OrgChartDiagramOptions {
   updateNode: UpdateOrgChartNode;
 }
 
+// evita crear gojs cuando angular corre en pruebas sin canvas real
 export function canUseBrowserCanvas(host: HTMLElement): boolean {
   const view = host.ownerDocument.defaultView;
 
   return !!view && !view.navigator.userAgent.includes('jsdom');
 }
 
+// arma el diagrama principal con layout, modelo y plantillas de gojs
 export function createOrgChartDiagram(host: HTMLDivElement, options: OrgChartDiagramOptions): go.Diagram {
   const $ = go.GraphObject.make;
   const diagram = new go.Diagram(host, {
@@ -46,6 +48,7 @@ export function createOrgChartDiagram(host: HTMLDivElement, options: OrgChartDia
   return diagram;
 }
 
+// crea el minimapa conectado al diagrama principal
 export function createOrgChartOverview(host: HTMLDivElement, diagram: go.Diagram): go.Overview {
   return new go.Overview(host, {
     observed: diagram,
@@ -53,34 +56,41 @@ export function createOrgChartOverview(host: HTMLDivElement, diagram: go.Diagram
   });
 }
 
+// suelta el div para que gojs limpie el canvas
 export function disposeDiagram(diagram?: go.Diagram): void {
   if (diagram) {
     diagram.div = null;
   }
 }
 
+// suelta el div del overview cuando el componente se destruye
 export function disposeOverview(overview?: go.Overview): void {
   if (overview) {
     overview.div = null;
   }
 }
 
+// encaja todo el organigrama dentro del viewport
 export function fitDiagram(diagram?: go.Diagram): void {
   diagram?.commandHandler.zoomToFit();
 }
 
+// acerca el canvas desde la toolbar
 export function zoomIn(diagram?: go.Diagram): void {
   diagram?.commandHandler.increaseZoom(1.2);
 }
 
+// aleja el canvas desde la toolbar
 export function zoomOut(diagram?: go.Diagram): void {
   diagram?.commandHandler.decreaseZoom(1.2);
 }
 
+// devuelve los nodos que ya estan cargados en el modelo de gojs
 export function getDiagramNodes(diagram: go.Diagram): OrgNode[] {
   return (diagram.model as go.TreeModel).nodeDataArray as OrgNode[];
 }
 
+// carga hijos para un nodo especifico sin exponer detalles de gojs al panel
 export async function loadDiagramNodeChildren(
   diagram: go.Diagram | undefined,
   parentKey: number,
@@ -95,6 +105,7 @@ export async function loadDiagramNodeChildren(
   return loadNodeChildren(diagram, node, getChildren);
 }
 
+// selecciona y centra un nodo en el canvas
 export function selectNodeByKey(diagram: go.Diagram | undefined, key: number): void {
   if (!diagram) {
     return;
@@ -110,6 +121,7 @@ export function selectNodeByKey(diagram: go.Diagram | undefined, key: number): v
   diagram.centerRect(node.actualBounds);
 }
 
+// crea la cuadricula tenue del fondo
 function createGrid($: typeof go.GraphObject.make): go.Panel {
   return $(
     go.Panel,
@@ -120,6 +132,7 @@ function createGrid($: typeof go.GraphObject.make): go.Panel {
   );
 }
 
+// define la linea que conecta padre e hijo
 function createLinkTemplate($: typeof go.GraphObject.make): go.Link {
   return $(
     go.Link,
@@ -132,6 +145,7 @@ function createLinkTemplate($: typeof go.GraphObject.make): go.Link {
   );
 }
 
+// define como se ve y se comporta cada tarjeta del organigrama
 function createNodeTemplate($: typeof go.GraphObject.make, options: OrgChartDiagramOptions): go.Node {
   return $(
     go.Node,
@@ -265,6 +279,7 @@ function createNodeTemplate($: typeof go.GraphObject.make, options: OrgChartDiag
   );
 }
 
+// persiste cambios de texto hechos directamente en una tarjeta
 function persistTextEdit(
   textBlock: go.TextBlock,
   propertyName: keyof Pick<OrgNode, 'name' | 'title' | 'dept'>,
@@ -279,6 +294,7 @@ function persistTextEdit(
   void updateNode(data.key, { [propertyName]: textBlock.text });
 }
 
+// crea el boton que expande, colapsa o dispara lazy loading
 function createTreeToggleButton($: typeof go.GraphObject.make, getChildren: GetOrgChartChildren): go.Panel {
   return $(
     'Button',
@@ -309,6 +325,7 @@ function createTreeToggleButton($: typeof go.GraphObject.make, getChildren: GetO
   );
 }
 
+// decide si un nodo se expande, colapsa o primero carga sus hijos
 async function toggleTreeNode(
   diagram: go.Diagram,
   node: go.Node | null,
@@ -333,6 +350,7 @@ async function toggleTreeNode(
   }
 }
 
+// agrega al modelo los hijos que todavia no estan dibujados
 async function loadNodeChildren(
   diagram: go.Diagram,
   node: go.Node,
@@ -345,6 +363,7 @@ async function loadNodeChildren(
     return [];
   }
 
+  // gojs necesita transacciones para que el modelo y undo queden consistentes
   diagram.startTransaction('mark children loading');
   model.setDataProperty(parent, 'isLoadingChildren', true);
   diagram.commitTransaction('mark children loading');
@@ -374,6 +393,7 @@ async function loadNodeChildren(
   }
 }
 
+// crea el menu contextual para acciones sobre una tarjeta
 function createNodeMenu($: typeof go.GraphObject.make, options: OrgChartDiagramOptions): go.Adornment {
   return $(
     'ContextMenu',
@@ -390,6 +410,7 @@ function createNodeMenu($: typeof go.GraphObject.make, options: OrgChartDiagramO
   );
 }
 
+// marca visualmente un posible padre mientras se arrastra un nodo
 function setReparentTarget(event: go.InputEvent, target: go.Node, isActive: boolean): void {
   const dragged = event.diagram.selection.first() as go.Node | null;
   const card = target.findObject('CARD') as go.Shape | null;
@@ -402,6 +423,7 @@ function setReparentTarget(event: go.InputEvent, target: go.Node, isActive: bool
   card.strokeWidth = isActive ? 2 : 1;
 }
 
+// cambia el padre del nodo arrastrado y guarda el cambio
 function reparentSelection(event: go.InputEvent, target: go.Node, updateNode: UpdateOrgChartNode): void {
   const dragged = event.diagram.selection.first() as go.Node | null;
 
@@ -418,10 +440,12 @@ function reparentSelection(event: go.InputEvent, target: go.Node, updateNode: Up
   void updateNode(draggedData.key, { parent: targetData.key });
 }
 
+// evita ciclos y que un nodo sea padre de si mismo
 function canReparent(dragged: go.Node | null, target: go.Node): boolean {
   return !!dragged && dragged !== target && !target.findTreeParentChain().has(dragged);
 }
 
+// crea un reporte directo debajo del nodo seleccionado
 async function addDirectReport(node: go.Node | null, options: OrgChartDiagramOptions): Promise<void> {
   const diagram = node?.diagram;
 
@@ -432,6 +456,7 @@ async function addDirectReport(node: go.Node | null, options: OrgChartDiagramOpt
   const model = diagram.model as go.TreeModel;
   const boss = node.data as OrgNode;
 
+  // si el nodo tiene hijos pendientes, primero los carga para no pisar el arbol
   if (boss.hasChildren && !boss.childrenLoaded) {
     await loadNodeChildren(diagram, node, options.getChildren);
   }
