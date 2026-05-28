@@ -22,6 +22,7 @@ import { fitDiagram, zoomIn, zoomOut } from './factories/org-chart-diagram.facto
 })
 export class OrgChartEditorComponent {
   diagram?: go.Diagram;
+  diagramRevision = 0;
   showCanvasSearch = false;
   showTreeView = false;
 
@@ -31,6 +32,10 @@ export class OrgChartEditorComponent {
 
   onDiagramReady(diagram: go.Diagram): void {
     this.diagram = diagram;
+  }
+
+  onDiagramChanged(): void {
+    this.diagramRevision += 1;
   }
 
   fitDiagram(): void {

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, OnDestroy, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, NgZone, OnDestroy, Output, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import * as go from 'gojs';
 import { firstValueFrom } from 'rxjs';
@@ -28,6 +28,7 @@ import { OrgNode } from '../../types/org-node.types';
 })
 export class OrgChartCanvasComponent implements AfterViewInit, OnDestroy {
   @Output() diagramReady = new EventEmitter<go.Diagram>(true);
+  @Output() diagramChanged = new EventEmitter<void>();
 
   @ViewChild('diagramHost', { static: true })
   private diagramHost?: ElementRef<HTMLDivElement>;
@@ -35,7 +36,10 @@ export class OrgChartCanvasComponent implements AfterViewInit, OnDestroy {
   private diagram?: go.Diagram;
   private isDestroyed = false;
 
-  constructor(private readonly dialog: MatDialog) {}
+  constructor(
+    private readonly dialog: MatDialog,
+    private readonly zone: NgZone
+  ) {}
 
   // crea el diagrama cuando el contenedor ya existe en pantalla
   ngAfterViewInit(): void {
@@ -49,6 +53,7 @@ export class OrgChartCanvasComponent implements AfterViewInit, OnDestroy {
   // libera el canvas de gojs cuando angular destruye el componente
   ngOnDestroy(): void {
     this.isDestroyed = true;
+    this.diagram?.removeModelChangedListener(this.handleDiagramModelChanged);
     disposeDiagram(this.diagram);
   }
 
@@ -68,10 +73,20 @@ export class OrgChartCanvasComponent implements AfterViewInit, OnDestroy {
       deleteNode: deleteOrgChartNode,
       updateNode: updateOrgChartNode
     });
+    this.diagram.addModelChangedListener(this.handleDiagramModelChanged);
     this.diagramReady.emit(this.diagram);
 
     requestAnimationFrame(() => setInitialDiagramView(this.diagram));
   }
+
+  // avisa a angular cuando gojs termina de cambiar el modelo
+  private readonly handleDiagramModelChanged = (event: go.ChangedEvent): void => {
+    if (!event.isTransactionFinished || this.isDestroyed) {
+      return;
+    }
+
+    this.zone.run(() => this.diagramChanged.emit());
+  };
 
   private async confirmDeleteNode(node: OrgNode): Promise<boolean> {
     const confirmedImpact = await this.openDeleteConfirmation({

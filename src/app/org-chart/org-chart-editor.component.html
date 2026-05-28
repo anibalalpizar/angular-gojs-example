@@ -10,7 +10,10 @@
     (toggleTree)="showTreeView = !showTreeView"
   ></app-org-chart-toolbar>
 
-  <app-org-chart-canvas (diagramReady)="onDiagramReady($event)"></app-org-chart-canvas>
+  <app-org-chart-canvas
+    (diagramReady)="onDiagramReady($event)"
+    (diagramChanged)="onDiagramChanged()"
+  ></app-org-chart-canvas>
 
   <app-canvas-search
     [diagram]="diagram"
@@ -19,6 +22,7 @@
 
   <app-tree-view-panel
     [diagram]="diagram"
+    [diagramRevision]="diagramRevision"
     [(isOpen)]="showTreeView"
   ></app-tree-view-panel>
 

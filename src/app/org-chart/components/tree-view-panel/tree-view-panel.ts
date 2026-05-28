@@ -18,6 +18,7 @@ import { getDepartmentColor, getInitials } from '../../utils/org-chart-formatter
 })
 export class TreeViewPanelComponent implements OnChanges {
   @Input() diagram: go.Diagram | undefined;
+  @Input() diagramRevision = 0;
   @Input() isOpen = false;
   @Output() isOpenChange = new EventEmitter<boolean>();
 
@@ -32,7 +33,9 @@ export class TreeViewPanelComponent implements OnChanges {
 
   // reconstruye el arbol cuando cambia el diagrama o se abre el panel
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['diagram'] || (changes['isOpen'] && this.isOpen)) {
+    const shouldRefreshOpenTree = changes['diagram'] || changes['diagramRevision'];
+
+    if ((changes['isOpen'] && this.isOpen) || (this.isOpen && shouldRefreshOpenTree)) {
       this.buildTree();
     }
     if (changes['isOpen'] && !this.isOpen) {
