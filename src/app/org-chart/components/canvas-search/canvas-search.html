@@ -54,7 +54,7 @@
       [style.padding-left.px]="12 + depth * 16"
       (click)="navigateTo(node.key)"
     >
-      <span class="search-tree-avatar" [style.backgroundColor]="getDeptColor(node.dept)">
+      <span class="search-tree-avatar" [style.backgroundColor]="getNodeColor(node.level)">
         {{ getInitials(node.name) }}
       </span>
       <div class="search-tree-info">

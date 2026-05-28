@@ -7,7 +7,7 @@ import { MAX_SEARCH_RESULTS } from '../../constants/org-chart.constants';
 import { getDiagramNodes, selectNodeByKey } from '../../factories/org-chart-diagram.factory';
 import { OrgNode, SearchResultNode } from '../../types/org-node.types';
 import { searchOrgChart } from '../../utils/org-chart-query';
-import { getDepartmentColor, getInitials } from '../../utils/org-chart-formatters';
+import { getInitials, getLevelColor } from '../../utils/org-chart-formatters';
 
 @Component({
   selector: 'app-canvas-search',
@@ -69,8 +69,8 @@ export class CanvasSearchComponent implements OnChanges {
     this.clearResults();
   }
 
-  getDeptColor(dept: string): string {
-    return getDepartmentColor(dept);
+  getNodeColor(level?: number): string {
+    return getLevelColor(level);
   }
 
   getInitials(name: string): string {

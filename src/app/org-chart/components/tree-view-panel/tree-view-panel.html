@@ -61,7 +61,7 @@
         }
 
         <button class="tree-label" (click)="navigateTo(node.key)">
-          <span class="tree-avatar" [style.backgroundColor]="getDeptColor(node.dept)">
+          <span class="tree-avatar" [style.backgroundColor]="getNodeColor(node.level)">
             {{ getInitials(node.name) }}
           </span>
           <div class="tree-info">

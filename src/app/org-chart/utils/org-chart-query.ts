@@ -123,6 +123,7 @@ function buildSearchResultTree(nodes: OrgNode[], matches: OrgNode[]): SearchResu
       name: node.name,
       title: node.title,
       dept: node.dept,
+      level: node.level,
       isMatch: matchKeys.has(node.key),
       children: []
     });

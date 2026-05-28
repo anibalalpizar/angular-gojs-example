@@ -11,7 +11,7 @@ import {
   OrgNode,
   UpdateOrgNodeRequest
 } from '../types/org-node.types';
-import { getDepartmentColor, getInitials } from '../utils/org-chart-formatters';
+import { getInitials, getLevelColor } from '../utils/org-chart-formatters';
 
 export type GetOrgChartChildren = (parentKey: number) => Promise<OrgNode[]>;
 export type CreateOrgChartNode = (request: CreateOrgNodeRequest) => Promise<OrgNode>;
@@ -227,7 +227,7 @@ function createNodeTemplate($: typeof go.GraphObject.make, options: OrgChartDiag
           height: 7,
           strokeWidth: 0
         },
-        new go.Binding('fill', 'dept', (dept: string) => getDepartmentColor(dept))
+        new go.Binding('fill', 'level', (level?: number) => getLevelColor(level))
       ),
       $(
         go.Panel,
@@ -251,7 +251,7 @@ function createNodeTemplate($: typeof go.GraphObject.make, options: OrgChartDiag
             height: 40,
             strokeWidth: 0
           },
-          new go.Binding('fill', 'dept', (dept: string) => getDepartmentColor(dept))
+          new go.Binding('fill', 'level', (level?: number) => getLevelColor(level))
         ),
         $(
           go.TextBlock,
@@ -494,14 +494,26 @@ function reparentSelection(event: go.InputEvent, target: go.Node, updateNode: Up
 
   const draggedData = dragged!.data as OrgNode;
   const targetData = target.data as OrgNode;
+  const model = event.diagram.model as go.TreeModel;
 
-  event.diagram.model.setDataProperty(draggedData, 'parent', targetData.key);
+  model.setDataProperty(draggedData, 'parent', targetData.key);
+  updateLoadedSubtreeLevels(model, draggedData, (targetData.level ?? 1) + 1);
   void updateNode(draggedData.key, { parent: targetData.key });
 }
 
 // evita ciclos y que un nodo sea padre de si mismo
 function canReparent(dragged: go.Node | null, target: go.Node): boolean {
   return !!dragged && dragged !== target && !target.findTreeParentChain().has(dragged);
+}
+
+// refresca niveles cargados para que el color cambie al mover ramas
+function updateLoadedSubtreeLevels(model: go.TreeModel, root: OrgNode, level: number): void {
+  model.setDataProperty(root, 'level', level);
+
+  const children = (model.nodeDataArray as OrgNode[]).filter((node) => node.parent === root.key);
+  for (const child of children) {
+    updateLoadedSubtreeLevels(model, child, level + 1);
+  }
 }
 
 // crea un reporte directo debajo del nodo seleccionado

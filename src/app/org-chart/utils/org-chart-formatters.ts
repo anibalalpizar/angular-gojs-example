@@ -1,8 +1,8 @@
-import { DEPT_COLORS, FALLBACK_DEPT_COLOR } from '../constants/org-chart.constants';
+import { FALLBACK_LEVEL_COLOR, LEVEL_COLORS } from '../constants/org-chart.constants';
 
-// devuelve el color configurado para cada departamento
-export function getDepartmentColor(dept: string): string {
-  return DEPT_COLORS[dept] ?? FALLBACK_DEPT_COLOR;
+// devuelve el color configurado para cada nivel del arbol
+export function getLevelColor(level?: number): string {
+  return LEVEL_COLORS[level ?? 0] ?? FALLBACK_LEVEL_COLOR;
 }
 
 // toma las primeras letras del nombre para el avatar

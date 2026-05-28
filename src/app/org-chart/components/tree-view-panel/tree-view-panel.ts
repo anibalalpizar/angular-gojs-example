@@ -7,7 +7,7 @@ import { getDiagramNodes, loadDiagramNodeChildren, selectNodeByKey } from '../..
 import { getOrgChartChildrenItems } from '../../data/org-chart-api';
 import { TreeNode } from '../../types/org-node.types';
 import { buildTree, filterTree } from '../../utils/org-chart-query';
-import { getDepartmentColor, getInitials } from '../../utils/org-chart-formatters';
+import { getInitials, getLevelColor } from '../../utils/org-chart-formatters';
 
 @Component({
   selector: 'app-tree-view-panel',
@@ -65,8 +65,8 @@ export class TreeViewPanelComponent implements OnChanges {
     selectNodeByKey(this.diagram, key);
   }
 
-  getDeptColor(dept: string): string {
-    return getDepartmentColor(dept);
+  getNodeColor(level?: number): string {
+    return getLevelColor(level);
   }
 
   getInitials(name: string): string {

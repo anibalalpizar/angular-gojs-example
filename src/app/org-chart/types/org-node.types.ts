@@ -39,6 +39,7 @@ export interface SearchResultNode {
   name: string;
   title: string;
   dept: string;
+  level?: number;
   isMatch: boolean;
   children: SearchResultNode[];
 }
