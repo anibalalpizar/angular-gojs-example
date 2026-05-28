@@ -14,3 +14,4 @@ export const PANEL_GAP = 16;
 export const INITIAL_DIAGRAM_SCALE = 0.85;
 export const INITIAL_DIAGRAM_COMPACT_SCALE = 0.65;
 export const COMPACT_VIEWPORT_WIDTH = 700;
+export const DIAGRAM_ZOOM_STEP = 1.2;

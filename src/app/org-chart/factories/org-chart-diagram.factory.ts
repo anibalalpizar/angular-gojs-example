@@ -1,6 +1,7 @@
 import * as go from 'gojs';
 import {
   COMPACT_VIEWPORT_WIDTH,
+  DIAGRAM_ZOOM_STEP,
   INITIAL_DIAGRAM_COMPACT_SCALE,
   INITIAL_DIAGRAM_SCALE
 } from '../constants/org-chart.constants';
@@ -105,12 +106,16 @@ export function setInitialDiagramView(diagram?: go.Diagram): void {
 
 // acerca el canvas desde la toolbar
 export function zoomIn(diagram?: go.Diagram): void {
-  diagram?.commandHandler.increaseZoom(1.2);
+  if (diagram) {
+    diagram.scale *= DIAGRAM_ZOOM_STEP;
+  }
 }
 
 // aleja el canvas desde la toolbar
 export function zoomOut(diagram?: go.Diagram): void {
-  diagram?.commandHandler.decreaseZoom(1.2);
+  if (diagram) {
+    diagram.scale /= DIAGRAM_ZOOM_STEP;
+  }
 }
 
 // devuelve los nodos que ya estan cargados en el modelo de gojs
