@@ -17,19 +17,23 @@ export class OrgChartOverviewComponent implements AfterViewInit, OnChanges, OnDe
   private overview?: go.Overview;
   private viewReady = false;
 
+  // espera a que exista el contenedor antes de crear el overview
   ngAfterViewInit(): void {
     this.viewReady = true;
     this.attachOverview();
   }
 
+  // intenta reconectar el overview cuando cambia el diagrama
   ngOnChanges(_changes: SimpleChanges): void {
     this.attachOverview();
   }
 
+  // limpia el overview para no dejar referencias al canvas
   ngOnDestroy(): void {
     disposeOverview(this.overview);
   }
 
+  // crea el overview solo cuando hay vista y diagrama listos
   private attachOverview(): void {
     if (!this.viewReady || !this.overviewHost || !this.diagram) {
       return;

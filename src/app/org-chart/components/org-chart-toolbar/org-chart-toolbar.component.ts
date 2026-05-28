@@ -7,6 +7,7 @@ import { LucideMaximize2, LucideNetwork, LucideSearch, LucideZoomIn, LucideZoomO
   templateUrl: './org-chart-toolbar.component.html',
   styleUrl: './org-chart-toolbar.component.css'
 })
+// concentra las acciones principales del diagrama
 export class OrgChartToolbarComponent {
   @Input() rightOffset = 16;
   @Input() searchActive = false;

@@ -27,12 +27,14 @@ export class CanvasSearchComponent implements OnChanges {
 
   private flatMatches: OrgNode[] = [];
 
+  // limpia la busqueda cuando se cierra el panel
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['isOpen'] && !this.isOpen) {
       this.clear();
     }
   }
 
+  // busca sobre los nodos que ya estan cargados en el diagrama
   onSearch(): void {
     const term = this.searchTerm.toLowerCase().trim();
     if (!term || !this.diagram) {
@@ -48,17 +50,20 @@ export class CanvasSearchComponent implements OnChanges {
     this.resultTree = result.resultTree;
   }
 
+  // centra el nodo elegido y cierra la busqueda
   navigateTo(key: number): void {
     selectNodeByKey(this.diagram, key);
     this.clear();
   }
 
+  // permite saltar rapido al primer resultado
   selectFirst(): void {
     if (this.flatMatches.length > 0) {
       this.navigateTo(this.flatMatches[0].key);
     }
   }
 
+  // borra el texto y los resultados visibles
   clear(): void {
     this.searchTerm = '';
     this.clearResults();
@@ -72,6 +77,7 @@ export class CanvasSearchComponent implements OnChanges {
     return getInitials(name);
   }
 
+  // deja el panel sin resultados activos
   private clearResults(): void {
     this.resultTree = [];
     this.resultsTotal = 0;

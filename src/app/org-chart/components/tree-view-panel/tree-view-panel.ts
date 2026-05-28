@@ -25,10 +25,12 @@ export class TreeViewPanelComponent implements OnChanges {
   treeData: TreeNode[] = [];
   filteredData: TreeNode[] = [];
 
+  // avisa al padre que debe cerrar el panel
   close(): void {
     this.isOpenChange.emit(false);
   }
 
+  // reconstruye el arbol cuando cambia el diagrama o se abre el panel
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['diagram'] || (changes['isOpen'] && this.isOpen)) {
       this.buildTree();
@@ -39,10 +41,12 @@ export class TreeViewPanelComponent implements OnChanges {
     }
   }
 
+  // aplica el filtro escrito en el panel
   onSearchChange(): void {
     this.applyFilter();
   }
 
+  // expande un nodo y carga hijos si aun no estan en el modelo
   async toggleNode(node: TreeNode): Promise<void> {
     if (this.diagram && node.hasChildren && !node.childrenLoaded) {
       await loadDiagramNodeChildren(this.diagram, node.key, getOrgChartChildrenItems);
@@ -53,6 +57,7 @@ export class TreeViewPanelComponent implements OnChanges {
     node.expanded = !node.expanded;
   }
 
+  // selecciona el nodo en el canvas desde el arbol lateral
   navigateTo(key: number): void {
     selectNodeByKey(this.diagram, key);
   }
@@ -65,6 +70,7 @@ export class TreeViewPanelComponent implements OnChanges {
     return getInitials(name);
   }
 
+  // arma el arbol usando solo los nodos que ya conoce gojs
   private buildTree(expandedNodeKey?: number): void {
     if (!this.diagram) {
       this.treeData = [];
@@ -79,10 +85,12 @@ export class TreeViewPanelComponent implements OnChanges {
     this.applyFilter();
   }
 
+  // recalcula la vista visible del arbol
   private applyFilter(): void {
     this.filteredData = filterTree(this.treeData, this.searchTerm);
   }
 
+  // deja abierto el nodo que acaba de cargar hijos
   private expandTreeNode(nodes: TreeNode[], key: number): boolean {
     for (const node of nodes) {
       if (node.key === key) {

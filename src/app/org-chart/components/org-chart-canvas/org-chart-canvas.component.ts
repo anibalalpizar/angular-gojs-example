@@ -27,6 +27,7 @@ export class OrgChartCanvasComponent implements AfterViewInit, OnDestroy {
   private diagram?: go.Diagram;
   private isDestroyed = false;
 
+  // crea el diagrama cuando el contenedor ya existe en pantalla
   ngAfterViewInit(): void {
     if (!this.diagramHost || !canUseBrowserCanvas(this.diagramHost.nativeElement)) {
       return;
@@ -35,11 +36,13 @@ export class OrgChartCanvasComponent implements AfterViewInit, OnDestroy {
     void this.initializeDiagram(this.diagramHost.nativeElement);
   }
 
+  // libera el canvas de gojs cuando angular destruye el componente
   ngOnDestroy(): void {
     this.isDestroyed = true;
     disposeDiagram(this.diagram);
   }
 
+  // carga los nodos iniciales y conecta las acciones de datos
   private async initializeDiagram(host: HTMLDivElement): Promise<void> {
     const initialNodes = await getInitialOrgChartNodes();
 
