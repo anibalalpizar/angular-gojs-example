@@ -1,4 +1,9 @@
 import * as go from 'gojs';
+import {
+  COMPACT_VIEWPORT_WIDTH,
+  INITIAL_DIAGRAM_COMPACT_SCALE,
+  INITIAL_DIAGRAM_SCALE
+} from '../constants/org-chart.constants';
 import { CreateOrgNodeRequest, OrgNode, UpdateOrgNodeRequest } from '../types/org-node.types';
 import { getDepartmentColor, getInitials } from '../utils/org-chart-formatters';
 
@@ -73,6 +78,29 @@ export function disposeOverview(overview?: go.Overview): void {
 // encaja todo el organigrama dentro del viewport
 export function fitDiagram(diagram?: go.Diagram): void {
   diagram?.commandHandler.zoomToFit();
+}
+
+// enfoca la raiz con un zoom mas comodo para la primera carga
+export function setInitialDiagramView(diagram?: go.Diagram): void {
+  if (!diagram) {
+    return;
+  }
+
+  const rootData = getDiagramNodes(diagram).find((node) => node.parent == null);
+  const rootNode = rootData ? diagram.findNodeForKey(rootData.key) : null;
+
+  if (!rootNode) {
+    fitDiagram(diagram);
+    return;
+  }
+
+  const viewportWidth = diagram.div?.clientWidth ?? diagram.viewportBounds.width;
+  diagram.scale = viewportWidth < COMPACT_VIEWPORT_WIDTH ? INITIAL_DIAGRAM_COMPACT_SCALE : INITIAL_DIAGRAM_SCALE;
+  diagram.select(rootNode);
+  diagram.position = new go.Point(
+    rootNode.actualBounds.centerX - diagram.viewportBounds.width / 2,
+    rootNode.actualBounds.y - 24
+  );
 }
 
 // acerca el canvas desde la toolbar

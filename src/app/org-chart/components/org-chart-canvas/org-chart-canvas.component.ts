@@ -4,7 +4,7 @@ import {
   canUseBrowserCanvas,
   createOrgChartDiagram,
   disposeDiagram,
-  fitDiagram
+  setInitialDiagramView
 } from '../../factories/org-chart-diagram.factory';
 import {
   createOrgChartNode,
@@ -58,6 +58,6 @@ export class OrgChartCanvasComponent implements AfterViewInit, OnDestroy {
     });
     this.diagramReady.emit(this.diagram);
 
-    requestAnimationFrame(() => fitDiagram(this.diagram));
+    requestAnimationFrame(() => setInitialDiagramView(this.diagram));
   }
 }
