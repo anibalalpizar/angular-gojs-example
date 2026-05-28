@@ -53,7 +53,7 @@ export function createOrgChartDiagram(host: HTMLDivElement, options: OrgChartDia
     }),
     grid: createGrid($),
     'draggingTool.dragsTree': true,
-    'undoManager.isEnabled': true,
+    'undoManager.isEnabled': false,
     model: new go.TreeModel(options.initialNodes)
   });
 
