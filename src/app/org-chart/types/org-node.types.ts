@@ -20,6 +20,12 @@ export interface CreateOrgNodeRequest {
 
 export type UpdateOrgNodeRequest = Partial<Pick<OrgNode, 'name' | 'title' | 'dept' | 'parent'>>;
 
+export interface DeleteOrgNodeResult {
+  deletedKeys: number[];
+  parentKey?: number;
+  parentHasChildren: boolean;
+}
+
 export interface OrgChartNodePage<T> {
   items: T[];
   page: number;

@@ -1,0 +1,33 @@
+:host {
+  display: block;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h2[mat-dialog-title] {
+  color: #122033;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+mat-dialog-content {
+  color: #526173;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  max-width: 440px;
+}
+
+mat-dialog-content p {
+  margin: 0;
+}
+
+button {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.confirm-button.is-danger {
+  background: #b42318;
+  color: #ffffff;
+}

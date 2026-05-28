@@ -1,4 +1,10 @@
-import { CreateOrgNodeRequest, OrgChartNodePage, OrgNode, UpdateOrgNodeRequest } from '../types/org-node.types';
+import {
+  CreateOrgNodeRequest,
+  DeleteOrgNodeResult,
+  OrgChartNodePage,
+  OrgNode,
+  UpdateOrgNodeRequest
+} from '../types/org-node.types';
 
 const SOURCE_JSON_FILE = 'org-chart-data/org-chart-data.json';
 const INITIAL_LOAD_DEPTH = 3;
@@ -77,6 +83,29 @@ export async function updateLocalOrgChartNode(
   rebuildIndexes();
 
   return toLazyNode(node, false);
+}
+
+// elimina un nodo y todos sus descendientes solo en memoria para la demo
+export async function deleteLocalOrgChartNode(key: number): Promise<DeleteOrgNodeResult | undefined> {
+  await ensureSourceNodes();
+
+  const node = nodesByKey.get(key);
+  if (!node) {
+    return undefined;
+  }
+
+  const parentKey = node.parent;
+  const deletedKeys = collectSubtreeKeys(key);
+  const deletedKeySet = new Set(deletedKeys);
+
+  sourceNodes = sourceNodes.filter((sourceNode) => !deletedKeySet.has(sourceNode.key));
+  rebuildIndexes();
+
+  return {
+    deletedKeys,
+    ...(parentKey == null ? {} : { parentKey }),
+    parentHasChildren: parentKey == null ? false : (childrenByParent.get(parentKey)?.length ?? 0) > 0
+  };
 }
 
 // carga el json una sola vez durante la sesion del navegador
@@ -158,6 +187,24 @@ function getNodeLevel(node: OrgNode): number {
 // genera una llave temporal para la demo local
 function getNextSourceKey(): number {
   return Math.max(...sourceNodes.map((node) => node.key), 0) + 1;
+}
+
+// junta la llave del nodo seleccionado y la de todos sus hijos reales
+function collectSubtreeKeys(rootKey: number): number[] {
+  const keys: number[] = [];
+  const pendingKeys = [rootKey];
+
+  while (pendingKeys.length > 0) {
+    const currentKey = pendingKeys.pop()!;
+    keys.push(currentKey);
+
+    const children = childrenByParent.get(currentKey) ?? [];
+    for (const child of children) {
+      pendingKeys.push(child.key);
+    }
+  }
+
+  return keys;
 }
 
 // remueve estado visual por si el json viene de una sesion anterior

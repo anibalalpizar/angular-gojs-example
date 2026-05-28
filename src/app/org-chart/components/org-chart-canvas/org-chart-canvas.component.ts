@@ -1,5 +1,7 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, OnDestroy, Output, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import * as go from 'gojs';
+import { firstValueFrom } from 'rxjs';
 import {
   canUseBrowserCanvas,
   createOrgChartDiagram,
@@ -8,10 +10,16 @@ import {
 } from '../../factories/org-chart-diagram.factory';
 import {
   createOrgChartNode,
+  deleteOrgChartNode,
   getInitialOrgChartNodes,
   getOrgChartChildrenItems,
   updateOrgChartNode
 } from '../../data/org-chart-api';
+import {
+  DeleteNodeConfirmationDialogComponent,
+  DeleteNodeConfirmationDialogData
+} from '../delete-node-confirmation-dialog/delete-node-confirmation-dialog';
+import { OrgNode } from '../../types/org-node.types';
 
 @Component({
   selector: 'app-org-chart-canvas',
@@ -26,6 +34,8 @@ export class OrgChartCanvasComponent implements AfterViewInit, OnDestroy {
 
   private diagram?: go.Diagram;
   private isDestroyed = false;
+
+  constructor(private readonly dialog: MatDialog) {}
 
   // crea el diagrama cuando el contenedor ya existe en pantalla
   ngAfterViewInit(): void {
@@ -54,10 +64,43 @@ export class OrgChartCanvasComponent implements AfterViewInit, OnDestroy {
       initialNodes,
       getChildren: getOrgChartChildrenItems,
       createNode: createOrgChartNode,
+      confirmDeleteNode: (node) => this.confirmDeleteNode(node),
+      deleteNode: deleteOrgChartNode,
       updateNode: updateOrgChartNode
     });
     this.diagramReady.emit(this.diagram);
 
     requestAnimationFrame(() => setInitialDiagramView(this.diagram));
+  }
+
+  private async confirmDeleteNode(node: OrgNode): Promise<boolean> {
+    const confirmedImpact = await this.openDeleteConfirmation({
+      title: 'Eliminar nodo',
+      message: `¿Está seguro de eliminar el nodo "${node.name}"? Si este nodo es padre, sus nodos hijos también se eliminarán.`,
+      confirmLabel: 'Sí, continuar',
+      isDanger: true
+    });
+
+    if (!confirmedImpact) {
+      return false;
+    }
+
+    return this.openDeleteConfirmation({
+      title: 'Confirmar eliminación',
+      message: '¿Está seguro de proceder con la eliminación? Esta acción no se puede deshacer.',
+      confirmLabel: 'Eliminar',
+      isDanger: true
+    });
+  }
+
+  private async openDeleteConfirmation(data: DeleteNodeConfirmationDialogData): Promise<boolean> {
+    const dialogRef = this.dialog.open(DeleteNodeConfirmationDialogComponent, {
+      width: '440px',
+      maxWidth: 'calc(100vw - 32px)',
+      restoreFocus: true,
+      data
+    });
+
+    return (await firstValueFrom(dialogRef.afterClosed())) === true;
   }
 }

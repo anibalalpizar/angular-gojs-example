@@ -5,17 +5,26 @@ import {
   INITIAL_DIAGRAM_COMPACT_SCALE,
   INITIAL_DIAGRAM_SCALE
 } from '../constants/org-chart.constants';
-import { CreateOrgNodeRequest, OrgNode, UpdateOrgNodeRequest } from '../types/org-node.types';
+import {
+  CreateOrgNodeRequest,
+  DeleteOrgNodeResult,
+  OrgNode,
+  UpdateOrgNodeRequest
+} from '../types/org-node.types';
 import { getDepartmentColor, getInitials } from '../utils/org-chart-formatters';
 
 export type GetOrgChartChildren = (parentKey: number) => Promise<OrgNode[]>;
 export type CreateOrgChartNode = (request: CreateOrgNodeRequest) => Promise<OrgNode>;
+export type ConfirmDeleteOrgChartNode = (node: OrgNode) => Promise<boolean>;
+export type DeleteOrgChartNode = (key: number) => Promise<DeleteOrgNodeResult | undefined>;
 export type UpdateOrgChartNode = (key: number, changes: UpdateOrgNodeRequest) => Promise<OrgNode | undefined>;
 
 export interface OrgChartDiagramOptions {
   initialNodes: OrgNode[];
   getChildren: GetOrgChartChildren;
   createNode: CreateOrgChartNode;
+  confirmDeleteNode: ConfirmDeleteOrgChartNode;
+  deleteNode: DeleteOrgChartNode;
   updateNode: UpdateOrgChartNode;
 }
 
@@ -431,14 +440,31 @@ function createNodeMenu($: typeof go.GraphObject.make, options: OrgChartDiagramO
   return $(
     'ContextMenu',
     $(
-      'ContextMenuButton',
-      $(go.TextBlock, 'Agregar reporte', { margin: new go.Margin(7, 12, 7, 12) }),
-      {
-        click: (_event, button) => {
-          const node = (button.part as go.Adornment).adornedPart as go.Node | null;
-          void addDirectReport(node, options);
+      go.Panel,
+      'Horizontal',
+      $(
+        'ContextMenuButton',
+        $(go.TextBlock, 'Agregar reporte', { margin: new go.Margin(7, 12, 7, 12) }),
+        {
+          click: (_event, button) => {
+            const node = (button.part as go.Adornment).adornedPart as go.Node | null;
+            void addDirectReport(node, options);
+          }
         }
-      }
+      ),
+      $(
+        'ContextMenuButton',
+        $(go.TextBlock, 'Eliminar nodo', {
+          margin: new go.Margin(7, 12, 7, 12),
+          stroke: '#a62b2b'
+        }),
+        {
+          click: (_event, button) => {
+            const node = (button.part as go.Adornment).adornedPart as go.Node | null;
+            void deleteNodeWithConfirmation(node, options);
+          }
+        }
+      )
     )
   );
 }
@@ -513,4 +539,66 @@ async function addDirectReport(node: go.Node | null, options: OrgChartDiagramOpt
     diagram.commandHandler.scrollToPart(addedNode);
     diagram.commandHandler.editTextBlock(addedNode.findObject('nameText') as go.TextBlock);
   }
+}
+
+// confirma y elimina el nodo junto con cualquier descendiente en la fuente de datos
+async function deleteNodeWithConfirmation(node: go.Node | null, options: OrgChartDiagramOptions): Promise<void> {
+  const diagram = node?.diagram;
+
+  if (!diagram || !node) {
+    return;
+  }
+
+  const model = diagram.model as go.TreeModel;
+  const deletedNode = node.data as OrgNode;
+
+  if (!(await options.confirmDeleteNode(deletedNode))) {
+    return;
+  }
+
+  const result = await options.deleteNode(deletedNode.key);
+  if (!result) {
+    console.warn(`No se encontro el nodo ${deletedNode.key} para eliminar.`);
+    return;
+  }
+
+  diagram.startTransaction('delete node subtree');
+  removeDeletedNodeData(model, result.deletedKeys);
+  updateDeletedParentState(model, result);
+  diagram.commitTransaction('delete node subtree');
+
+  selectDeletedParent(diagram, result.parentKey);
+}
+
+function removeDeletedNodeData(model: go.TreeModel, deletedKeys: number[]): void {
+  const deletedKeySet = new Set(deletedKeys);
+  const deletedData = (model.nodeDataArray as OrgNode[]).filter((node) => deletedKeySet.has(node.key));
+
+  model.removeNodeDataCollection(deletedData);
+}
+
+function updateDeletedParentState(model: go.TreeModel, result: DeleteOrgNodeResult): void {
+  if (result.parentKey == null) {
+    return;
+  }
+
+  const parentData = model.findNodeDataForKey(result.parentKey) as OrgNode | null;
+  if (!parentData) {
+    return;
+  }
+
+  model.setDataProperty(parentData, 'hasChildren', result.parentHasChildren);
+  if (!result.parentHasChildren) {
+    model.setDataProperty(parentData, 'childrenLoaded', true);
+    model.setDataProperty(parentData, 'isTreeExpanded', true);
+  }
+}
+
+function selectDeletedParent(diagram: go.Diagram, parentKey: number | undefined): void {
+  if (parentKey == null) {
+    diagram.clearSelection();
+    return;
+  }
+
+  selectNodeByKey(diagram, parentKey);
 }

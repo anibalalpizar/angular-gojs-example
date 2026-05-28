@@ -1,6 +1,13 @@
-import { CreateOrgNodeRequest, OrgChartNodePage, OrgNode, UpdateOrgNodeRequest } from '../types/org-node.types';
+import {
+  CreateOrgNodeRequest,
+  DeleteOrgNodeResult,
+  OrgChartNodePage,
+  OrgNode,
+  UpdateOrgNodeRequest
+} from '../types/org-node.types';
 import {
   createLocalOrgChartNode,
+  deleteLocalOrgChartNode,
   getLocalInitialOrgChartNodes,
   getLocalOrgChartChildren,
   updateLocalOrgChartNode
@@ -37,4 +44,9 @@ export function updateOrgChartNode(
   changes: UpdateOrgNodeRequest
 ): Promise<OrgNode | undefined> {
   return updateLocalOrgChartNode(key, changes);
+}
+
+// elimina un nodo usando la fuente actual de datos
+export function deleteOrgChartNode(key: number): Promise<DeleteOrgNodeResult | undefined> {
+  return deleteLocalOrgChartNode(key);
 }
