@@ -1,0 +1,29 @@
+<main class="org-chart-shell">
+  <app-org-chart-toolbar
+    [rightOffset]="panelOffset"
+    [searchActive]="showCanvasSearch"
+    [treeActive]="showTreeView"
+    (fit)="fitDiagram()"
+    (zoomIn)="zoomIn()"
+    (zoomOut)="zoomOut()"
+    (toggleSearch)="showCanvasSearch = !showCanvasSearch"
+    (toggleTree)="showTreeView = !showTreeView"
+  ></app-org-chart-toolbar>
+
+  <app-org-chart-canvas (diagramReady)="onDiagramReady($event)"></app-org-chart-canvas>
+
+  <app-canvas-search
+    [diagram]="diagram"
+    [isOpen]="showCanvasSearch"
+  ></app-canvas-search>
+
+  <app-tree-view-panel
+    [diagram]="diagram"
+    [(isOpen)]="showTreeView"
+  ></app-tree-view-panel>
+
+  <app-org-chart-overview
+    [diagram]="diagram"
+    [rightOffset]="panelOffset"
+  ></app-org-chart-overview>
+</main>

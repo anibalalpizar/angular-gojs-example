@@ -21,6 +21,6 @@ describe('App', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('.diagram-canvas')).toBeTruthy();
     expect(compiled.querySelector('.overview-canvas')).toBeTruthy();
-    expect(compiled.querySelectorAll('.icon-button').length).toBe(3);
+    expect(compiled.querySelectorAll('.icon-button').length).toBe(5);
   });
 });

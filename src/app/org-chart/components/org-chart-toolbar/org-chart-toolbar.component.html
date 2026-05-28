@@ -1,0 +1,39 @@
+<div
+  class="diagram-toolbar"
+  aria-label="Controles del diagrama"
+  [style.right.px]="rightOffset"
+>
+  <button type="button" class="icon-button" aria-label="Encajar diagrama" title="Encajar" (click)="fit.emit()">
+    <svg lucideMaximize2 size="18"></svg>
+  </button>
+  <button type="button" class="icon-button" aria-label="Acercar" title="Zoom in" (click)="zoomIn.emit()">
+    <svg lucideZoomIn size="18"></svg>
+  </button>
+  <button type="button" class="icon-button" aria-label="Alejar" title="Zoom out" (click)="zoomOut.emit()">
+    <svg lucideZoomOut size="18"></svg>
+  </button>
+
+  <div class="toolbar-divider"></div>
+
+  <button
+    type="button"
+    class="icon-button"
+    [class.icon-button--active]="searchActive"
+    aria-label="Buscar en diagrama"
+    title="Buscar nodo"
+    (click)="toggleSearch.emit()"
+  >
+    <svg lucideSearch size="18"></svg>
+  </button>
+
+  <button
+    type="button"
+    class="icon-button"
+    [class.icon-button--active]="treeActive"
+    aria-label="Panel de navegación"
+    title="Árbol de navegación"
+    (click)="toggleTree.emit()"
+  >
+    <svg lucideNetwork size="18"></svg>
+  </button>
+</div>

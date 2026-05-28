@@ -1,0 +1,1051 @@
+[
+  {
+    "key": 1,
+    "name": "Ana Mora",
+    "title": "Directora General",
+    "dept": "Direccion"
+  },
+  {
+    "key": 2,
+    "name": "Carlos Navarro",
+    "title": "Directora de Area de Comercial",
+    "dept": "Comercial",
+    "parent": 1
+  },
+  {
+    "key": 3,
+    "name": "Maria Vargas",
+    "title": "Director de Area de Finanzas",
+    "dept": "Finanzas",
+    "parent": 1
+  },
+  {
+    "key": 4,
+    "name": "Sofia Alvarado",
+    "title": "Directora de Area de Soporte",
+    "dept": "Soporte",
+    "parent": 1
+  },
+  {
+    "key": 5,
+    "name": "Luis Castro",
+    "title": "Director de Area de Tecnologia",
+    "dept": "Tecnologia",
+    "parent": 1
+  },
+  {
+    "key": 6,
+    "name": "Valeria Campos",
+    "title": "Directora de Area de Marketing",
+    "dept": "Marketing",
+    "parent": 1
+  },
+  {
+    "key": 7,
+    "name": "Diego Soto",
+    "title": "Director de Area de Legal",
+    "dept": "Legal",
+    "parent": 1
+  },
+  {
+    "key": 8,
+    "name": "Natalia Zamora",
+    "title": "Directora de Area de Talento",
+    "dept": "Talento",
+    "parent": 1
+  },
+  {
+    "key": 9,
+    "name": "Andres Ruiz",
+    "title": "Director de Area de Direccion",
+    "dept": "Direccion",
+    "parent": 1
+  },
+  {
+    "key": 10,
+    "name": "Paola Jimenez",
+    "title": "Directora de Area de Operaciones",
+    "dept": "Operaciones",
+    "parent": 1
+  },
+  {
+    "key": 11,
+    "name": "Marco Mendez",
+    "title": "Gerente Senior de Comercial",
+    "dept": "Comercial",
+    "parent": 2
+  },
+  {
+    "key": 12,
+    "name": "Lucia Brenes",
+    "title": "Gerente Senior de Finanzas",
+    "dept": "Finanzas",
+    "parent": 3
+  },
+  {
+    "key": 13,
+    "name": "Roberto Vega",
+    "title": "Gerente Senior de Soporte",
+    "dept": "Soporte",
+    "parent": 4
+  },
+  {
+    "key": 14,
+    "name": "Camila Rojas",
+    "title": "Gerente Senior de Tecnologia",
+    "dept": "Tecnologia",
+    "parent": 5
+  },
+  {
+    "key": 15,
+    "name": "Jorge Salazar",
+    "title": "Gerente Senior de Marketing",
+    "dept": "Marketing",
+    "parent": 6
+  },
+  {
+    "key": 16,
+    "name": "Daniela Acuna",
+    "title": "Gerente Senior de Legal",
+    "dept": "Legal",
+    "parent": 7
+  },
+  {
+    "key": 17,
+    "name": "Fernando Madrigal",
+    "title": "Gerente Senior de Talento",
+    "dept": "Talento",
+    "parent": 8
+  },
+  {
+    "key": 18,
+    "name": "Elena Arias",
+    "title": "Gerente Senior de Direccion",
+    "dept": "Direccion",
+    "parent": 9
+  },
+  {
+    "key": 19,
+    "name": "Ricardo Quesada",
+    "title": "Gerente Senior de Operaciones",
+    "dept": "Operaciones",
+    "parent": 10
+  },
+  {
+    "key": 20,
+    "name": "Adriana Chaves",
+    "title": "Gerente Senior de Producto",
+    "dept": "Producto",
+    "parent": 2
+  },
+  {
+    "key": 21,
+    "name": "Mateo Arce",
+    "title": "Gerente Senior de Comercial",
+    "dept": "Comercial",
+    "parent": 3
+  },
+  {
+    "key": 22,
+    "name": "Isabel Herrera",
+    "title": "Gerente Senior de Finanzas",
+    "dept": "Finanzas",
+    "parent": 4
+  },
+  {
+    "key": 23,
+    "name": "Gabriel Alpizar",
+    "title": "Gerente Senior de Soporte",
+    "dept": "Soporte",
+    "parent": 5
+  },
+  {
+    "key": 24,
+    "name": "Laura Porras",
+    "title": "Gerente Senior de Tecnologia",
+    "dept": "Tecnologia",
+    "parent": 6
+  },
+  {
+    "key": 25,
+    "name": "Sebastian Montero",
+    "title": "Gerente Senior de Marketing",
+    "dept": "Marketing",
+    "parent": 7
+  },
+  {
+    "key": 26,
+    "name": "Claudia Solano",
+    "title": "Gerente Senior de Legal",
+    "dept": "Legal",
+    "parent": 8
+  },
+  {
+    "key": 27,
+    "name": "Emilio Leon",
+    "title": "Gerente Senior de Talento",
+    "dept": "Talento",
+    "parent": 9
+  },
+  {
+    "key": 28,
+    "name": "Rosa Cordero",
+    "title": "Gerente Senior de Direccion",
+    "dept": "Direccion",
+    "parent": 10
+  },
+  {
+    "key": 29,
+    "name": "Hector Calderon",
+    "title": "Gerente Senior de Operaciones",
+    "dept": "Operaciones",
+    "parent": 2
+  },
+  {
+    "key": 30,
+    "name": "Patricia Morales",
+    "title": "Gerente Senior de Producto",
+    "dept": "Producto",
+    "parent": 3
+  },
+  {
+    "key": 31,
+    "name": "Ana Mora",
+    "title": "Gerente Senior de Comercial",
+    "dept": "Comercial",
+    "parent": 4
+  },
+  {
+    "key": 32,
+    "name": "Carlos Navarro",
+    "title": "Gerente Senior de Finanzas",
+    "dept": "Finanzas",
+    "parent": 5
+  },
+  {
+    "key": 33,
+    "name": "Maria Vargas",
+    "title": "Gerente Senior de Soporte",
+    "dept": "Soporte",
+    "parent": 6
+  },
+  {
+    "key": 34,
+    "name": "Sofia Alvarado",
+    "title": "Gerente Senior de Tecnologia",
+    "dept": "Tecnologia",
+    "parent": 7
+  },
+  {
+    "key": 35,
+    "name": "Luis Castro",
+    "title": "Gerente Senior de Marketing",
+    "dept": "Marketing",
+    "parent": 8
+  },
+  {
+    "key": 36,
+    "name": "Valeria Campos",
+    "title": "Lider de Equipo de Talento",
+    "dept": "Talento",
+    "parent": 11
+  },
+  {
+    "key": 37,
+    "name": "Diego Soto",
+    "title": "Lider de Equipo de Direccion",
+    "dept": "Direccion",
+    "parent": 12
+  },
+  {
+    "key": 38,
+    "name": "Natalia Zamora",
+    "title": "Lider de Equipo de Operaciones",
+    "dept": "Operaciones",
+    "parent": 13
+  },
+  {
+    "key": 39,
+    "name": "Andres Ruiz",
+    "title": "Lider de Equipo de Producto",
+    "dept": "Producto",
+    "parent": 14
+  },
+  {
+    "key": 40,
+    "name": "Paola Jimenez",
+    "title": "Lider de Equipo de Comercial",
+    "dept": "Comercial",
+    "parent": 15
+  },
+  {
+    "key": 41,
+    "name": "Marco Mendez",
+    "title": "Lider de Equipo de Finanzas",
+    "dept": "Finanzas",
+    "parent": 16
+  },
+  {
+    "key": 42,
+    "name": "Lucia Brenes",
+    "title": "Lider de Equipo de Soporte",
+    "dept": "Soporte",
+    "parent": 17
+  },
+  {
+    "key": 43,
+    "name": "Roberto Vega",
+    "title": "Lider de Equipo de Tecnologia",
+    "dept": "Tecnologia",
+    "parent": 18
+  },
+  {
+    "key": 44,
+    "name": "Camila Rojas",
+    "title": "Lider de Equipo de Marketing",
+    "dept": "Marketing",
+    "parent": 19
+  },
+  {
+    "key": 45,
+    "name": "Jorge Salazar",
+    "title": "Lider de Equipo de Legal",
+    "dept": "Legal",
+    "parent": 20
+  },
+  {
+    "key": 46,
+    "name": "Daniela Acuna",
+    "title": "Lider de Equipo de Talento",
+    "dept": "Talento",
+    "parent": 21
+  },
+  {
+    "key": 47,
+    "name": "Fernando Madrigal",
+    "title": "Lider de Equipo de Direccion",
+    "dept": "Direccion",
+    "parent": 22
+  },
+  {
+    "key": 48,
+    "name": "Elena Arias",
+    "title": "Lider de Equipo de Operaciones",
+    "dept": "Operaciones",
+    "parent": 23
+  },
+  {
+    "key": 49,
+    "name": "Ricardo Quesada",
+    "title": "Lider de Equipo de Producto",
+    "dept": "Producto",
+    "parent": 24
+  },
+  {
+    "key": 50,
+    "name": "Adriana Chaves",
+    "title": "Lider de Equipo de Comercial",
+    "dept": "Comercial",
+    "parent": 25
+  },
+  {
+    "key": 51,
+    "name": "Mateo Arce",
+    "title": "Lider de Equipo de Finanzas",
+    "dept": "Finanzas",
+    "parent": 26
+  },
+  {
+    "key": 52,
+    "name": "Isabel Herrera",
+    "title": "Lider de Equipo de Soporte",
+    "dept": "Soporte",
+    "parent": 27
+  },
+  {
+    "key": 53,
+    "name": "Gabriel Alpizar",
+    "title": "Lider de Equipo de Tecnologia",
+    "dept": "Tecnologia",
+    "parent": 28
+  },
+  {
+    "key": 54,
+    "name": "Laura Porras",
+    "title": "Lider de Equipo de Marketing",
+    "dept": "Marketing",
+    "parent": 29
+  },
+  {
+    "key": 55,
+    "name": "Sebastian Montero",
+    "title": "Lider de Equipo de Legal",
+    "dept": "Legal",
+    "parent": 30
+  },
+  {
+    "key": 56,
+    "name": "Claudia Solano",
+    "title": "Lider de Equipo de Talento",
+    "dept": "Talento",
+    "parent": 31
+  },
+  {
+    "key": 57,
+    "name": "Emilio Leon",
+    "title": "Lider de Equipo de Direccion",
+    "dept": "Direccion",
+    "parent": 32
+  },
+  {
+    "key": 58,
+    "name": "Rosa Cordero",
+    "title": "Lider de Equipo de Operaciones",
+    "dept": "Operaciones",
+    "parent": 33
+  },
+  {
+    "key": 59,
+    "name": "Hector Calderon",
+    "title": "Lider de Equipo de Producto",
+    "dept": "Producto",
+    "parent": 34
+  },
+  {
+    "key": 60,
+    "name": "Patricia Morales",
+    "title": "Lider de Equipo de Comercial",
+    "dept": "Comercial",
+    "parent": 35
+  },
+  {
+    "key": 61,
+    "name": "Ana Mora",
+    "title": "Lider de Equipo de Finanzas",
+    "dept": "Finanzas",
+    "parent": 11
+  },
+  {
+    "key": 62,
+    "name": "Carlos Navarro",
+    "title": "Lider de Equipo de Soporte",
+    "dept": "Soporte",
+    "parent": 12
+  },
+  {
+    "key": 63,
+    "name": "Maria Vargas",
+    "title": "Lider de Equipo de Tecnologia",
+    "dept": "Tecnologia",
+    "parent": 13
+  },
+  {
+    "key": 64,
+    "name": "Sofia Alvarado",
+    "title": "Lider de Equipo de Marketing",
+    "dept": "Marketing",
+    "parent": 14
+  },
+  {
+    "key": 65,
+    "name": "Luis Castro",
+    "title": "Lider de Equipo de Legal",
+    "dept": "Legal",
+    "parent": 15
+  },
+  {
+    "key": 66,
+    "name": "Valeria Campos",
+    "title": "Lider de Equipo de Talento",
+    "dept": "Talento",
+    "parent": 16
+  },
+  {
+    "key": 67,
+    "name": "Diego Soto",
+    "title": "Lider de Equipo de Direccion",
+    "dept": "Direccion",
+    "parent": 17
+  },
+  {
+    "key": 68,
+    "name": "Natalia Zamora",
+    "title": "Lider de Equipo de Operaciones",
+    "dept": "Operaciones",
+    "parent": 18
+  },
+  {
+    "key": 69,
+    "name": "Andres Ruiz",
+    "title": "Lider de Equipo de Producto",
+    "dept": "Producto",
+    "parent": 19
+  },
+  {
+    "key": 70,
+    "name": "Paola Jimenez",
+    "title": "Lider de Equipo de Comercial",
+    "dept": "Comercial",
+    "parent": 20
+  },
+  {
+    "key": 71,
+    "name": "Marco Mendez",
+    "title": "Lider de Equipo de Finanzas",
+    "dept": "Finanzas",
+    "parent": 21
+  },
+  {
+    "key": 72,
+    "name": "Lucia Brenes",
+    "title": "Lider de Equipo de Soporte",
+    "dept": "Soporte",
+    "parent": 22
+  },
+  {
+    "key": 73,
+    "name": "Roberto Vega",
+    "title": "Lider de Equipo de Tecnologia",
+    "dept": "Tecnologia",
+    "parent": 23
+  },
+  {
+    "key": 74,
+    "name": "Camila Rojas",
+    "title": "Lider de Equipo de Marketing",
+    "dept": "Marketing",
+    "parent": 24
+  },
+  {
+    "key": 75,
+    "name": "Jorge Salazar",
+    "title": "Lider de Equipo de Legal",
+    "dept": "Legal",
+    "parent": 25
+  },
+  {
+    "key": 76,
+    "name": "Daniela Acuna",
+    "title": "Lider de Equipo de Talento",
+    "dept": "Talento",
+    "parent": 26
+  },
+  {
+    "key": 77,
+    "name": "Fernando Madrigal",
+    "title": "Lider de Equipo de Direccion",
+    "dept": "Direccion",
+    "parent": 27
+  },
+  {
+    "key": 78,
+    "name": "Elena Arias",
+    "title": "Lider de Equipo de Operaciones",
+    "dept": "Operaciones",
+    "parent": 28
+  },
+  {
+    "key": 79,
+    "name": "Ricardo Quesada",
+    "title": "Lider de Equipo de Producto",
+    "dept": "Producto",
+    "parent": 29
+  },
+  {
+    "key": 80,
+    "name": "Adriana Chaves",
+    "title": "Lider de Equipo de Comercial",
+    "dept": "Comercial",
+    "parent": 30
+  },
+  {
+    "key": 81,
+    "name": "Mateo Arce",
+    "title": "Lider de Equipo de Finanzas",
+    "dept": "Finanzas",
+    "parent": 31
+  },
+  {
+    "key": 82,
+    "name": "Isabel Herrera",
+    "title": "Lider de Equipo de Soporte",
+    "dept": "Soporte",
+    "parent": 32
+  },
+  {
+    "key": 83,
+    "name": "Gabriel Alpizar",
+    "title": "Lider de Equipo de Tecnologia",
+    "dept": "Tecnologia",
+    "parent": 33
+  },
+  {
+    "key": 84,
+    "name": "Laura Porras",
+    "title": "Lider de Equipo de Marketing",
+    "dept": "Marketing",
+    "parent": 34
+  },
+  {
+    "key": 85,
+    "name": "Sebastian Montero",
+    "title": "Lider de Equipo de Legal",
+    "dept": "Legal",
+    "parent": 35
+  },
+  {
+    "key": 86,
+    "name": "Claudia Solano",
+    "title": "Especialista Senior de Direccion",
+    "dept": "Direccion",
+    "parent": 36
+  },
+  {
+    "key": 87,
+    "name": "Emilio Leon",
+    "title": "Especialista Senior de Operaciones",
+    "dept": "Operaciones",
+    "parent": 37
+  },
+  {
+    "key": 88,
+    "name": "Rosa Cordero",
+    "title": "Especialista Senior de Producto",
+    "dept": "Producto",
+    "parent": 38
+  },
+  {
+    "key": 89,
+    "name": "Hector Calderon",
+    "title": "Especialista Senior de Comercial",
+    "dept": "Comercial",
+    "parent": 39
+  },
+  {
+    "key": 90,
+    "name": "Patricia Morales",
+    "title": "Especialista Senior de Finanzas",
+    "dept": "Finanzas",
+    "parent": 40
+  },
+  {
+    "key": 91,
+    "name": "Ana Mora",
+    "title": "Especialista Senior de Soporte",
+    "dept": "Soporte",
+    "parent": 41
+  },
+  {
+    "key": 92,
+    "name": "Carlos Navarro",
+    "title": "Especialista Senior de Tecnologia",
+    "dept": "Tecnologia",
+    "parent": 42
+  },
+  {
+    "key": 93,
+    "name": "Maria Vargas",
+    "title": "Especialista Senior de Marketing",
+    "dept": "Marketing",
+    "parent": 43
+  },
+  {
+    "key": 94,
+    "name": "Sofia Alvarado",
+    "title": "Especialista Senior de Legal",
+    "dept": "Legal",
+    "parent": 44
+  },
+  {
+    "key": 95,
+    "name": "Luis Castro",
+    "title": "Especialista Senior de Talento",
+    "dept": "Talento",
+    "parent": 45
+  },
+  {
+    "key": 96,
+    "name": "Valeria Campos",
+    "title": "Especialista Senior de Direccion",
+    "dept": "Direccion",
+    "parent": 46
+  },
+  {
+    "key": 97,
+    "name": "Diego Soto",
+    "title": "Especialista Senior de Operaciones",
+    "dept": "Operaciones",
+    "parent": 47
+  },
+  {
+    "key": 98,
+    "name": "Natalia Zamora",
+    "title": "Especialista Senior de Producto",
+    "dept": "Producto",
+    "parent": 48
+  },
+  {
+    "key": 99,
+    "name": "Andres Ruiz",
+    "title": "Especialista Senior de Comercial",
+    "dept": "Comercial",
+    "parent": 49
+  },
+  {
+    "key": 100,
+    "name": "Paola Jimenez",
+    "title": "Especialista Senior de Finanzas",
+    "dept": "Finanzas",
+    "parent": 50
+  },
+  {
+    "key": 101,
+    "name": "Marco Mendez",
+    "title": "Especialista Senior de Soporte",
+    "dept": "Soporte",
+    "parent": 51
+  },
+  {
+    "key": 102,
+    "name": "Lucia Brenes",
+    "title": "Especialista Senior de Tecnologia",
+    "dept": "Tecnologia",
+    "parent": 52
+  },
+  {
+    "key": 103,
+    "name": "Roberto Vega",
+    "title": "Especialista Senior de Marketing",
+    "dept": "Marketing",
+    "parent": 53
+  },
+  {
+    "key": 104,
+    "name": "Camila Rojas",
+    "title": "Especialista Senior de Legal",
+    "dept": "Legal",
+    "parent": 54
+  },
+  {
+    "key": 105,
+    "name": "Jorge Salazar",
+    "title": "Especialista Senior de Talento",
+    "dept": "Talento",
+    "parent": 55
+  },
+  {
+    "key": 106,
+    "name": "Daniela Acuna",
+    "title": "Especialista Senior de Direccion",
+    "dept": "Direccion",
+    "parent": 56
+  },
+  {
+    "key": 107,
+    "name": "Fernando Madrigal",
+    "title": "Especialista Senior de Operaciones",
+    "dept": "Operaciones",
+    "parent": 57
+  },
+  {
+    "key": 108,
+    "name": "Elena Arias",
+    "title": "Especialista Senior de Producto",
+    "dept": "Producto",
+    "parent": 58
+  },
+  {
+    "key": 109,
+    "name": "Ricardo Quesada",
+    "title": "Especialista Senior de Comercial",
+    "dept": "Comercial",
+    "parent": 59
+  },
+  {
+    "key": 110,
+    "name": "Adriana Chaves",
+    "title": "Especialista Senior de Finanzas",
+    "dept": "Finanzas",
+    "parent": 60
+  },
+  {
+    "key": 111,
+    "name": "Mateo Arce",
+    "title": "Especialista Senior de Soporte",
+    "dept": "Soporte",
+    "parent": 61
+  },
+  {
+    "key": 112,
+    "name": "Isabel Herrera",
+    "title": "Especialista Senior de Tecnologia",
+    "dept": "Tecnologia",
+    "parent": 62
+  },
+  {
+    "key": 113,
+    "name": "Gabriel Alpizar",
+    "title": "Especialista Senior de Marketing",
+    "dept": "Marketing",
+    "parent": 63
+  },
+  {
+    "key": 114,
+    "name": "Laura Porras",
+    "title": "Especialista Senior de Legal",
+    "dept": "Legal",
+    "parent": 64
+  },
+  {
+    "key": 115,
+    "name": "Sebastian Montero",
+    "title": "Especialista Senior de Talento",
+    "dept": "Talento",
+    "parent": 65
+  },
+  {
+    "key": 116,
+    "name": "Claudia Solano",
+    "title": "Especialista Senior de Direccion",
+    "dept": "Direccion",
+    "parent": 66
+  },
+  {
+    "key": 117,
+    "name": "Emilio Leon",
+    "title": "Especialista Senior de Operaciones",
+    "dept": "Operaciones",
+    "parent": 67
+  },
+  {
+    "key": 118,
+    "name": "Rosa Cordero",
+    "title": "Especialista Senior de Producto",
+    "dept": "Producto",
+    "parent": 68
+  },
+  {
+    "key": 119,
+    "name": "Hector Calderon",
+    "title": "Especialista Senior de Comercial",
+    "dept": "Comercial",
+    "parent": 69
+  },
+  {
+    "key": 120,
+    "name": "Patricia Morales",
+    "title": "Especialista Senior de Finanzas",
+    "dept": "Finanzas",
+    "parent": 70
+  },
+  {
+    "key": 121,
+    "name": "Ana Mora",
+    "title": "Especialista Senior de Soporte",
+    "dept": "Soporte",
+    "parent": 71
+  },
+  {
+    "key": 122,
+    "name": "Carlos Navarro",
+    "title": "Especialista Senior de Tecnologia",
+    "dept": "Tecnologia",
+    "parent": 72
+  },
+  {
+    "key": 123,
+    "name": "Maria Vargas",
+    "title": "Especialista Senior de Marketing",
+    "dept": "Marketing",
+    "parent": 73
+  },
+  {
+    "key": 124,
+    "name": "Sofia Alvarado",
+    "title": "Especialista Senior de Legal",
+    "dept": "Legal",
+    "parent": 74
+  },
+  {
+    "key": 125,
+    "name": "Luis Castro",
+    "title": "Especialista Senior de Talento",
+    "dept": "Talento",
+    "parent": 75
+  },
+  {
+    "key": 126,
+    "name": "Valeria Campos",
+    "title": "Analista de Operaciones",
+    "dept": "Operaciones",
+    "parent": 86
+  },
+  {
+    "key": 127,
+    "name": "Diego Soto",
+    "title": "Analista de Producto",
+    "dept": "Producto",
+    "parent": 87
+  },
+  {
+    "key": 128,
+    "name": "Natalia Zamora",
+    "title": "Analista de Comercial",
+    "dept": "Comercial",
+    "parent": 88
+  },
+  {
+    "key": 129,
+    "name": "Andres Ruiz",
+    "title": "Analista de Finanzas",
+    "dept": "Finanzas",
+    "parent": 89
+  },
+  {
+    "key": 130,
+    "name": "Paola Jimenez",
+    "title": "Analista de Soporte",
+    "dept": "Soporte",
+    "parent": 90
+  },
+  {
+    "key": 131,
+    "name": "Marco Mendez",
+    "title": "Analista de Tecnologia",
+    "dept": "Tecnologia",
+    "parent": 91
+  },
+  {
+    "key": 132,
+    "name": "Lucia Brenes",
+    "title": "Analista de Marketing",
+    "dept": "Marketing",
+    "parent": 92
+  },
+  {
+    "key": 133,
+    "name": "Roberto Vega",
+    "title": "Analista de Legal",
+    "dept": "Legal",
+    "parent": 93
+  },
+  {
+    "key": 134,
+    "name": "Camila Rojas",
+    "title": "Analista de Talento",
+    "dept": "Talento",
+    "parent": 94
+  },
+  {
+    "key": 135,
+    "name": "Jorge Salazar",
+    "title": "Analista de Direccion",
+    "dept": "Direccion",
+    "parent": 95
+  },
+  {
+    "key": 136,
+    "name": "Daniela Acuna",
+    "title": "Analista de Operaciones",
+    "dept": "Operaciones",
+    "parent": 96
+  },
+  {
+    "key": 137,
+    "name": "Fernando Madrigal",
+    "title": "Analista de Producto",
+    "dept": "Producto",
+    "parent": 97
+  },
+  {
+    "key": 138,
+    "name": "Elena Arias",
+    "title": "Analista de Comercial",
+    "dept": "Comercial",
+    "parent": 98
+  },
+  {
+    "key": 139,
+    "name": "Ricardo Quesada",
+    "title": "Analista de Finanzas",
+    "dept": "Finanzas",
+    "parent": 99
+  },
+  {
+    "key": 140,
+    "name": "Adriana Chaves",
+    "title": "Analista de Soporte",
+    "dept": "Soporte",
+    "parent": 100
+  },
+  {
+    "key": 141,
+    "name": "Mateo Arce",
+    "title": "Analista de Tecnologia",
+    "dept": "Tecnologia",
+    "parent": 101
+  },
+  {
+    "key": 142,
+    "name": "Isabel Herrera",
+    "title": "Analista de Marketing",
+    "dept": "Marketing",
+    "parent": 102
+  },
+  {
+    "key": 143,
+    "name": "Gabriel Alpizar",
+    "title": "Analista de Legal",
+    "dept": "Legal",
+    "parent": 103
+  },
+  {
+    "key": 144,
+    "name": "Laura Porras",
+    "title": "Analista de Talento",
+    "dept": "Talento",
+    "parent": 104
+  },
+  {
+    "key": 145,
+    "name": "Sebastian Montero",
+    "title": "Analista de Direccion",
+    "dept": "Direccion",
+    "parent": 105
+  },
+  {
+    "key": 146,
+    "name": "Claudia Solano",
+    "title": "Analista de Operaciones",
+    "dept": "Operaciones",
+    "parent": 106
+  },
+  {
+    "key": 147,
+    "name": "Emilio Leon",
+    "title": "Analista de Producto",
+    "dept": "Producto",
+    "parent": 107
+  },
+  {
+    "key": 148,
+    "name": "Rosa Cordero",
+    "title": "Analista de Comercial",
+    "dept": "Comercial",
+    "parent": 108
+  },
+  {
+    "key": 149,
+    "name": "Hector Calderon",
+    "title": "Analista de Finanzas",
+    "dept": "Finanzas",
+    "parent": 109
+  },
+  {
+    "key": 150,
+    "name": "Patricia Morales",
+    "title": "Analista de Soporte",
+    "dept": "Soporte",
+    "parent": 110
+  }
+]

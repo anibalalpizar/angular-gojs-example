@@ -3,10 +3,7 @@
     <div class="canvas-search-box">
       <div class="canvas-search-input-wrapper">
         <span class="canvas-search-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
-            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
-          </svg>
+          <svg lucideSearch size="15"></svg>
         </span>
         <input
           type="text"
@@ -20,7 +17,9 @@
           aria-label="Buscar nodo en el diagrama"
         />
         @if (searchTerm) {
-          <button class="canvas-search-clear" (click)="clear()" aria-label="Limpiar búsqueda">✕</button>
+          <button class="canvas-search-clear" (click)="clear()" aria-label="Limpiar búsqueda">
+            <svg lucideX size="14"></svg>
+          </button>
         }
       </div>
 
@@ -30,9 +29,9 @@
             [ngTemplateOutlet]="searchTreeTpl"
             [ngTemplateOutletContext]="{ nodes: resultTree, depth: 0 }"
           ></ng-container>
-          @if (resultsTotal > 8) {
+          @if (resultsTotal > maxResults) {
             <div class="canvas-search-more">
-              +{{ resultsTotal - 8 }} coincidencias más — sigue escribiendo para filtrar
+              +{{ resultsTotal - maxResults }} coincidencias más - sigue escribiendo para filtrar
             </div>
           }
         </div>
@@ -47,7 +46,6 @@
   </div>
 }
 
-<!-- Recursive search-tree template (outside @if so the ref is always resolvable) -->
 <ng-template #searchTreeTpl let-nodes="nodes" let-depth="depth">
   <div *ngFor="let node of nodes" class="search-tree-node">
     <button

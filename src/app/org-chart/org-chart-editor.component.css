@@ -1,0 +1,7 @@
+.org-chart-shell {
+  position: relative;
+  width: 100vw;
+  height: 100dvh;
+  overflow: hidden;
+  background: #f6f8fb;
+}
